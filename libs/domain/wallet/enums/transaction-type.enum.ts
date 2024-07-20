@@ -1,0 +1,7 @@
+export enum TransactionType {
+  ADDITION = 'ADDITION',
+  WITHDRAWAL = 'WITHDRAWAL',
+  PURCHASE = 'PURCHASE',
+  CANCELLATION = 'CANCELLATION',
+  REFUND = 'REFUND',
+}

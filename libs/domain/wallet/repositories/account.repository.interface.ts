@@ -1,0 +1,5 @@
+import { AccountEntityDomain } from '../entities/account-entity-domain';
+
+export interface AccountRepositoryInterface {
+  findById(accountId: string): Promise<AccountEntityDomain>;
+}
