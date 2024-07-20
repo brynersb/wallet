@@ -11,7 +11,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:waller-worker:debug": "nest start waller-worker --debug --watch",
+    "start:wallet-worker:debug": "nest start wallet-worker --debug --watch",
     "start:prod": "node dist/apps/wallet-api/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",

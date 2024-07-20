@@ -19,13 +19,13 @@
         "tsConfigPath": "apps/wallet-api/tsconfig.app.json"
       }
     },
-    "waller-worker": {
+    "wallet-worker": {
       "type": "application",
-      "root": "apps/waller-worker",
+      "root": "apps/wallet-worker",
       "entryFile": "main",
-      "sourceRoot": "apps/waller-worker/src",
+      "sourceRoot": "apps/wallet-worker/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/waller-worker/tsconfig.app.json"
+        "tsConfigPath": "apps/wallet-worker/tsconfig.app.json"
       }
     },
     "domain": {
