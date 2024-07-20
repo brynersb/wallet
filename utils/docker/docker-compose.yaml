@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  localstack:
+      container_name: wallet-localstack
+      image: localstack/localstack
+      ports:
+        - "4510-4559:4510-4559"
+        - "4566:4566"
+      environment:
+        - SERVICES=sqs
+        - AWS_DEFAULT_REGION=us-east-1
+        - DEFAULT_REGION=us-east-1
+        - DOCKER_HOST=unix:///var/run/docker.sock
+      volumes:
+      - "./start-localstack.sh:/etc/localstack/init/ready.d/start-localstack.sh"
+  db:
+      container_name: wallet-db
+      image: postgres
+      restart: on-failure
+      environment:
+        POSTGRES_PASSWORD: 123456
+        POSTGRES_INITDB_XLOGDIR: "log"
+      ports:
+        - "5432:5432"
+      volumes:
+        - "pgdata:/var/lib/postgresql/data2"
+        - "./init-db/init.sql:/docker-entrypoint-initdb.d/init.sql"
+volumes:
+  pgdata:
