@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountEntity } from './entities/account.entity';
 import { CustomerEntity } from './entities/Customer.entity';
 import { typeOrmEntities } from './entities';
-import { EventsEntity } from './entities/events.entity';
 import { TransactionEntity } from './entities/transaction.entity';
 
 @Module({
@@ -22,7 +21,7 @@ import { TransactionEntity } from './entities/transaction.entity';
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([AccountEntity, CustomerEntity, EventsEntity, TransactionEntity]),
+    TypeOrmModule.forFeature([AccountEntity, CustomerEntity, TransactionEntity]),
   ],
   exports: [TypeOrmModule],
 })

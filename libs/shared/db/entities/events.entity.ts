@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { AccountEntity } from './account.entity';
 import { TransactionType } from '../../../domain/wallet/enums/transaction-type.enum';
 
-@Entity()
+@Entity('events')
 export class EventsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

@@ -6,14 +6,16 @@ export interface TransactionProps {
   account: AccountEntityDomain;
   type: TransactionType;
   amount: number;
-  created_at: Date;
-  updated_at: Date;
+  status: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export class TransactionEntityDomain extends Entity<TransactionProps> {
   private _account: AccountEntityDomain;
   private _type: TransactionType;
   private _amount: number;
+  private _status: string;
   private _date: Date;
   private _createdAt: Date;
   private _updatedAt: Date;
@@ -23,8 +25,9 @@ export class TransactionEntityDomain extends Entity<TransactionProps> {
     this.account = this.props.account;
     this.type = this.props.type;
     this.amount = this.props.amount;
-    this._createdAt = this.props.created_at;
-    this._updatedAt = this.props.updated_at;
+    this.status = this.props.status;
+    this.createdAt = this.props.createdAt;
+    this.updatedAt = this.props.updatedAt;
   }
 
   get account(): AccountEntityDomain {
@@ -49,6 +52,14 @@ export class TransactionEntityDomain extends Entity<TransactionProps> {
 
   private set amount(value: number) {
     this._amount = value;
+  }
+
+  get status(): string {
+    return this._status;
+  }
+
+  private set status(value: string) {
+    this._status = value;
   }
 
   get date(): Date {

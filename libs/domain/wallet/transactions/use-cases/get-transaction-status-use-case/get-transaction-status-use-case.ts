@@ -1,26 +1,33 @@
 import { LoggerServiceInterface } from '../../../../common/services/logger/logger.service.interface';
+import { BusinessError } from '../../../../common/types/business-error';
 import { TransactionEntityDomain } from '../../../entities/transaction-entity-domain';
 import { TransactionRepositoryInterface } from '../../../repositories/transaction.repository.interface';
-import { GetTransactionStatusUseCaseInterface } from './get-transaction-status-caseinterface';
+import TransactionErrorKey from '../../../utils/transaction-error-key';
+import { GetTransactionStatusUseCaseInterface } from './get-transaction-status-case.interface';
 
 export class GetTransactionStatusUseCase implements GetTransactionStatusUseCaseInterface {
+  private errorMessage: string;
   constructor(
     private readonly loggerService: LoggerServiceInterface,
     private readonly transactionRepository: TransactionRepositoryInterface,
   ) {}
-  async execute(transactionId: string): Promise<TransactionEntityDomain> {
+  async execute(transactionId: string): Promise<TransactionEntityDomain | BusinessError> {
     try {
       this.loggerService.log(`Start get transaction status:${transactionId}`);
       const transactionFinded = await this.transactionRepository.findById(transactionId);
+
       if (!transactionFinded) {
-        const errorMessage = `Transaction not found: transactionId:${transactionId}`;
-        this.loggerService.error(errorMessage);
-        throw new Error(errorMessage);
+        this.errorMessage = `Transaction not found: transactionId:${transactionId}`;
+        this.loggerService.error(this.errorMessage);
+        return new BusinessError(TransactionErrorKey.trasactionNotFound, this.errorMessage);
       }
 
+      this.loggerService.log(`Succesfully get transaction status:${transactionFinded}`);
       return transactionFinded;
     } catch (error) {
-      this.loggerService.error(`An error has occurred while requesting transaction, error:${error.message}`);
+      this.errorMessage = `An error has occurred while get transaction by id, error:${error.message}`;
+      this.loggerService.error(this.errorMessage);
+      return new BusinessError(TransactionErrorKey.findTrasactionByIdGeneralError, this.errorMessage);
     }
   }
 }

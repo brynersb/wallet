@@ -1,13 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { CustomerEntity } from './Customer.entity';
 import { TransactionEntity } from './transaction.entity';
 
-@Entity()
+@Entity('account')
 export class AccountEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @ManyToOne(() => CustomerEntity, (customer) => customer.accounts)
+  @JoinColumn({ name: 'customer_id' })
   customer: CustomerEntity;
 
   @Column('decimal', { precision: 10, scale: 2 })

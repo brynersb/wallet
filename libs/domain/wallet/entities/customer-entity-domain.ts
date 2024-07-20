@@ -6,8 +6,8 @@ export interface CustomerProps {
   email: string;
   password: string;
   accounts: AccountEntityDomain[];
-  created_at: Date;
-  updated_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export class CustomerEntityDomain extends Entity<CustomerProps> {
@@ -24,8 +24,8 @@ export class CustomerEntityDomain extends Entity<CustomerProps> {
     this.email = this.props.email;
     this.password = this.props.password;
     this.accounts = this.props.accounts;
-    this._createdAt = this.props.created_at;
-    this._updatedAt = this.props.updated_at;
+    this.createdAt = this.props.createdAt;
+    this.updatedAt = this.props.updatedAt;
   }
 
   get name(): string {

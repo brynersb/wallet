@@ -4,7 +4,7 @@ import { TransactionRepositoryInterface } from '../../../../libs/domain/wallet/r
 import { GetTransactionStatusUseCase } from '../../../../libs/domain/wallet/transactions/use-cases/get-transaction-status-use-case/get-transaction-status-use-case';
 
 export const GetTransactionStatusProvider = {
-  provide: 'RequestTransactionUseCaseInterface',
+  provide: 'GetTransactionStatusUseCaseInterface',
   useFactory: (loggerService: LoggerServiceInterface, transactionRepository: TransactionRepositoryInterface) => {
     return new GetTransactionStatusUseCase(loggerService, transactionRepository);
   },
