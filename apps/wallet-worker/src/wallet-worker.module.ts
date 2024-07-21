@@ -25,6 +25,7 @@ const envProperties = `${rootDir}/.env`;
       useValue: {
         DEPOSIT: WalletProcessorService,
         WITHDRAWAL: WalletProcessorService,
+        BUY: WalletProcessorService,
       },
     },
     SqsConsumerService,

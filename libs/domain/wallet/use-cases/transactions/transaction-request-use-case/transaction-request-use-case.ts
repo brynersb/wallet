@@ -21,6 +21,12 @@ export class TransactionRequestUseCase implements TransactionRequestUseCaseInter
   async execute(request: TransactionOperationRequest): Promise<TransactionEntityDomain | BusinessError> {
     try {
       this.loggerService.log(`Start process transaction for accountId:${request.accountId}`);
+      const transactionTypeIsValid = this.isValidTransactionType(request.type);
+      if (!transactionTypeIsValid) {
+        this.errorMessage = `trasactionType not valid, trasactionId:${request.transactionId}`;
+        this.loggerService.error(this.errorMessage);
+        return new BusinessError(TransactionErrorKey.trasactionTypeNotValid, this.errorMessage);
+      }
 
       if (request.type === TransactionType.CANCELLATION || request.type === TransactionType.REFUND) {
         const transactionFinded = await this.transactionRepository.findById(request.transactionId);
@@ -63,7 +69,7 @@ export class TransactionRequestUseCase implements TransactionRequestUseCaseInter
     }
   }
 
-  private async validateCancellationOrRefundAmount(transactionId: string) {
-    return await this.transactionRepository.findById(transactionId);
+  private isValidTransactionType(value: string): boolean {
+    return Object.values(TransactionType).includes(value as TransactionType);
   }
 }

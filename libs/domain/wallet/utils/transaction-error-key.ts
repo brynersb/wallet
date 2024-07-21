@@ -3,4 +3,5 @@ export default class TransactionErrorKey {
   public static readonly requestTrasactionGeneralError = 'wallet.request.transaction.general.error';
   public static readonly trasactionNotFound = 'wallet.transaction.not.found';
   public static readonly accountNotFound = 'wallet.account.not.found';
+  public static readonly trasactionTypeNotValid = 'wallet.transaction.type.not.valid';
 }

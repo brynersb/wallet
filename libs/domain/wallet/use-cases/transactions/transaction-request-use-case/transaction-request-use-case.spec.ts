@@ -238,4 +238,25 @@ describe('TransactionRequestUseCase', () => {
     expect(sqsProducer.sendMessage).toHaveBeenCalled();
     expect(result).toBeInstanceOf(TransactionEntityDomain);
   });
+
+  it('should return a BusinessError if transactionType is not valid', async () => {
+    const request: TransactionOperationRequest = {
+      accountId: '1',
+      type: 'INVALID_TYPE' as TransactionType,
+      amount: 100,
+      customerId: '1',
+      transactionId: '123',
+    };
+
+    const result = await transactionRequestUseCase.execute(request);
+
+    expect(loggerService.log).toHaveBeenCalledWith(`Start process transaction for accountId:${request.accountId}`);
+    expect(loggerService.error).toHaveBeenCalledWith(`trasactionType not valid, trasactionId:${request.transactionId}`);
+    expect(result).toEqual(
+      new BusinessError(
+        TransactionErrorKey.trasactionTypeNotValid,
+        `trasactionType not valid, trasactionId:${request.transactionId}`,
+      ),
+    );
+  });
 });
