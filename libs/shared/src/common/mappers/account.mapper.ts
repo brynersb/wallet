@@ -8,7 +8,7 @@ export class AccountMapper {
     return new AccountEntityDomain(
       {
         customer: accountEntity.customer ? CustomerMapper.toDomain(accountEntity.customer) : undefined,
-        balance: accountEntity.balance,
+        balance: parseFloat(accountEntity.balance.toString()),
         transactions: accountEntity.transactions
           ? accountEntity.transactions.map((transaction) => TransactionMapper.toDomain(transaction))
           : undefined,

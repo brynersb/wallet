@@ -1,7 +1,13 @@
 export enum TransactionType {
   DEPOSIT = 'DEPOSIT',
   WITHDRAWAL = 'WITHDRAWAL',
-  PURCHASE = 'PURCHASE',
+  BUY = 'BUY',
   CANCELLATION = 'CANCELLATION',
   REFUND = 'REFUND',
+}
+
+export enum TransactionStatus {
+  PROCESSING = 'PROCESSING',
+  PROCESSED = 'PROCESSED',
+  ERROR = 'ERROR',
 }

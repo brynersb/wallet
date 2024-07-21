@@ -3,7 +3,7 @@ import { LoggerServiceInterface } from '../../../../libs/domain/common/services/
 import { SQSProducerServiceInterface } from '../../../../libs/shared/src/common/services/sqs/sqs-producer/sqs-producer.service.interface';
 import { TransactionRepositoryInterface } from '../../../../libs/domain/wallet/repositories/transaction.repository.interface';
 import { AccountRepositoryInterface } from '../../../../libs/domain/wallet/repositories/account.repository.interface';
-import { TransactionRequestUseCase } from '../../../../libs/domain/wallet/transactions/use-cases/transaction-request-use-case/transaction-request-use-case';
+import { TransactionRequestUseCase } from '../../../../libs/domain/wallet/use-cases/transactions/transaction-request-use-case/transaction-request-use-case';
 
 export const TransactionRequestProvider = {
   provide: 'RequestTransactionUseCaseInterface',

@@ -8,6 +8,7 @@ import { TransactionRepositoryInterface } from '../../../repositories/transactio
 import TransactionErrorKey from '../../../utils/transaction-error-key';
 import { TransactionOperationRequest } from '../../../types/transaction-operation-type';
 import { TransactionRequestUseCaseInterface } from './transaction-request-use-case.interface';
+import { TransactionStatus, TransactionType } from '../../../enums/transaction-type.enum';
 
 export class TransactionRequestUseCase implements TransactionRequestUseCaseInterface {
   private errorMessage: string;
@@ -20,6 +21,15 @@ export class TransactionRequestUseCase implements TransactionRequestUseCaseInter
   async execute(request: TransactionOperationRequest): Promise<TransactionEntityDomain | BusinessError> {
     try {
       this.loggerService.log(`Start process transaction for accountId:${request.accountId}`);
+
+      if (request.type === TransactionType.CANCELLATION || request.type === TransactionType.REFUND) {
+        const transactionFinded = await this.transactionRepository.findById(request.transactionId);
+        if (!transactionFinded) {
+          this.errorMessage = `trasaction not found, trasactionId:${request.transactionId}`;
+          this.loggerService.error(this.errorMessage);
+          return new BusinessError(TransactionErrorKey.trasactionNotFound, this.errorMessage);
+        }
+      }
       const findedAccount = await this.accountRepository.findById(request.accountId);
       if (!findedAccount) {
         this.errorMessage = `Account not found, accountId:${request.accountId}`;
@@ -29,7 +39,7 @@ export class TransactionRequestUseCase implements TransactionRequestUseCaseInter
 
       const transaction = new TransactionEntityDomain({
         account: findedAccount,
-        status: 'PROCESSING',
+        status: TransactionStatus.PROCESSING,
         type: request.type,
         amount: request.amount,
         createdAt: new Date(),
@@ -39,7 +49,7 @@ export class TransactionRequestUseCase implements TransactionRequestUseCaseInter
 
       const transactionRequestMessage: MessageBody = {
         transactionId: transaction.id,
-        accnountId: findedAccount.id,
+        accauntId: findedAccount.id,
         transactionType: transaction.type,
         amount: transaction.amount,
       };
@@ -51,5 +61,9 @@ export class TransactionRequestUseCase implements TransactionRequestUseCaseInter
       this.loggerService.error(this.errorMessage);
       return new BusinessError(TransactionErrorKey.requestTrasactionGeneralError, this.errorMessage);
     }
+  }
+
+  private async validateCancellationOrRefundAmount(transactionId: string) {
+    return await this.transactionRepository.findById(transactionId);
   }
 }

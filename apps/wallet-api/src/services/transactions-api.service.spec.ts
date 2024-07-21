@@ -3,7 +3,7 @@ import { TransactionsApiService } from './transactions-api.service';
 
 import { TransactionEntityDomain } from '../../../../libs/domain/wallet/entities/transaction-entity-domain';
 import { BusinessError } from '../../../../libs/domain/common/types/business-error';
-import { TransactionType } from '../../../../libs/domain/wallet/enums/transaction-type.enum';
+import { TransactionStatus, TransactionType } from '../../../../libs/domain/wallet/enums/transaction-type.enum';
 import TransactionErrorKey from '../../../../libs/domain/wallet/utils/transaction-error-key';
 import { AccountEntityDomain } from '../../../../libs/domain/wallet/entities/account-entity-domain';
 import { TransactionRequestUseCaseInterface } from '../../../../libs/domain/wallet/use-cases/transactions/transaction-request-use-case/transaction-request-use-case.interface';
@@ -54,7 +54,7 @@ describe('TransactionsApiService', () => {
         account: {} as AccountEntityDomain, //
         type: TransactionType.DEPOSIT,
         amount: 10.5,
-        status: 'PROCESSING',
+        status: TransactionStatus.PROCESSING,
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -97,7 +97,7 @@ describe('TransactionsApiService', () => {
         account: {} as AccountEntityDomain,
         type: TransactionType.DEPOSIT,
         amount: 10.5,
-        status: 'PROCESSING',
+        status: TransactionStatus.PROCESSING,
         createdAt: new Date(),
         updatedAt: new Date(),
       });

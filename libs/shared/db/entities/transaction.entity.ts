@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { AccountEntity } from './account.entity';
-import { TransactionType } from '../../../domain/wallet/enums/transaction-type.enum';
+import { TransactionStatus, TransactionType } from '../../../domain/wallet/enums/transaction-type.enum';
 
 @Entity('transaction')
 export class TransactionEntity {
@@ -17,8 +17,11 @@ export class TransactionEntity {
   })
   type: TransactionType;
 
-  @Column()
-  status: string;
+  @Column({
+    type: 'enum',
+    enum: TransactionStatus,
+  })
+  status: TransactionStatus;
 
   @Column('decimal', { precision: 10, scale: 2 })
   amount: number;

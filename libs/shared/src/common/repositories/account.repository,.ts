@@ -18,4 +18,9 @@ export class AccountRepository implements AccountRepositoryInterface {
     const mappedAccount = AccountMapper.toRepository(account);
     await this.accountRepository.save(mappedAccount);
   }
+
+  async update(account: AccountEntityDomain): Promise<void> {
+    const mappedAccount = AccountMapper.toRepository(account);
+    await this.accountRepository.update(mappedAccount.id, mappedAccount);
+  }
 }

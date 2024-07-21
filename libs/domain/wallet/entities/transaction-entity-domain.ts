@@ -1,12 +1,12 @@
 import Entity from '../../common/types/entity/entity';
-import { TransactionType } from '../enums/transaction-type.enum';
+import { TransactionStatus, TransactionType } from '../enums/transaction-type.enum';
 import { AccountEntityDomain } from './account-entity-domain';
 
 export interface TransactionProps {
   account: AccountEntityDomain;
   type: TransactionType;
   amount: number;
-  status: string;
+  status: TransactionStatus;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -15,7 +15,7 @@ export class TransactionEntityDomain extends Entity<TransactionProps> {
   private _account: AccountEntityDomain;
   private _type: TransactionType;
   private _amount: number;
-  private _status: string;
+  private _status: TransactionStatus;
   private _date: Date;
   private _createdAt: Date;
   private _updatedAt: Date;
@@ -54,12 +54,24 @@ export class TransactionEntityDomain extends Entity<TransactionProps> {
     this._amount = value;
   }
 
-  get status(): string {
+  get status(): TransactionStatus {
     return this._status;
   }
 
-  private set status(value: string) {
+  private set status(value: TransactionStatus) {
     this._status = value;
+  }
+
+  public updateStatusProcessing() {
+    this._status = TransactionStatus.PROCESSING;
+  }
+
+  public updateStatusProcessed() {
+    this._status = TransactionStatus.PROCESSED;
+  }
+
+  public updateStatusError() {
+    this._status = TransactionStatus.ERROR;
   }
 
   get date(): Date {

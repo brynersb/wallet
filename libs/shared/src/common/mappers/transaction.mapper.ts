@@ -20,7 +20,9 @@ export class TransactionMapper {
   static toRepository(transactionDomain: TransactionEntityDomain): TransactionEntity {
     const transactionEntity = new TransactionEntity();
     transactionEntity.id = transactionDomain.id;
-    transactionEntity.account = AccountMapper.toRepository(transactionDomain.account);
+    transactionEntity.account = transactionDomain.account
+      ? AccountMapper.toRepository(transactionDomain.account)
+      : undefined;
     transactionEntity.amount = transactionDomain.amount;
     transactionEntity.type = transactionDomain.type;
     transactionEntity.status = transactionDomain.status;

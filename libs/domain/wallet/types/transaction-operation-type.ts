@@ -1,6 +1,7 @@
 import { TransactionType } from '../enums/transaction-type.enum';
 
 export type TransactionOperation = {
+  messageId: string;
   transactionId: string;
   accnountId: string;
   amount: number;
@@ -11,4 +12,5 @@ export type TransactionOperationRequest = {
   type: TransactionType;
   customerId: string;
   amount: number;
+  transactionId?: string;
 };

@@ -20,4 +20,9 @@ export class TransactionRepository implements TransactionRepositoryInterface {
     const mappedTransaction = TransactionMapper.toRepository(transaction);
     await this.transactionRepository.save(mappedTransaction);
   }
+
+  async update(transaction: TransactionEntityDomain): Promise<void> {
+    const mappedTransaction = TransactionMapper.toRepository(transaction);
+    await this.transactionRepository.update(mappedTransaction.id, mappedTransaction);
+  }
 }

@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsNumber, IsPositive, IsUUID } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber, IsPositive, IsUUID, IsOptional } from 'class-validator';
 import { TransactionType } from '../../../../libs/domain/wallet/enums/transaction-type.enum';
 
 export class TransactionRequestDto {
@@ -34,4 +34,13 @@ export class TransactionRequestDto {
   @IsNumber({ allowNaN: false, allowInfinity: false, maxDecimalPlaces: 2 })
   @IsPositive()
   amount: number;
+
+  /**
+   * transaction Id
+   * is mandatory in cases of cancellation or refund of amounts
+   * @example 16153f35-5b0a-4eb6-a4b4-c1ea55816bdc
+   */
+  @IsOptional()
+  @IsString()
+  transactionId?: string;
 }

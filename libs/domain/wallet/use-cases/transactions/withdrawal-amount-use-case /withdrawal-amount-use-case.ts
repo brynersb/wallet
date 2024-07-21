@@ -1,9 +1,9 @@
 import { AccountEntityDomain } from '../../../entities/account-entity-domain';
 import { BaseTransactionUseCase } from '../base-transaction-use-case';
-import { DepositAmounttUseCaseInterface } from './deposit-amount-use-case.interface';
+import { WithdrawalAmountUseCaseInterface } from './withdrawal-amount-use-case.interface';
 
-export class DepositAmountUseCase extends BaseTransactionUseCase implements DepositAmounttUseCaseInterface {
+export class WithdrawalAmountUseCase extends BaseTransactionUseCase implements WithdrawalAmountUseCaseInterface {
   protected async processTransaction(account: AccountEntityDomain, amount: number): Promise<void> {
-    account.addAmount(amount);
+    account.subtractAmount(amount);
   }
 }

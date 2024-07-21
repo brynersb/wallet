@@ -4,7 +4,7 @@ import { TransactionRepositoryInterface } from '../../../repositories/transactio
 import { TransactionEntityDomain } from '../../../entities/transaction-entity-domain';
 import { BusinessError } from '../../../../common/types/business-error';
 import TransactionErrorKey from '../../../utils/transaction-error-key';
-import { TransactionType } from '../../../enums/transaction-type.enum';
+import { TransactionStatus, TransactionType } from '../../../enums/transaction-type.enum';
 import { AccountEntityDomain } from '../../../entities/account-entity-domain';
 
 describe('GetTransactionStatusUseCase', () => {
@@ -22,6 +22,7 @@ describe('GetTransactionStatusUseCase', () => {
     transactionRepository = {
       findById: jest.fn(),
       create: jest.fn(),
+      update: jest.fn(),
     };
 
     getTransactionStatusUseCase = new GetTransactionStatusUseCase(loggerService, transactionRepository);
@@ -33,7 +34,7 @@ describe('GetTransactionStatusUseCase', () => {
       account: {} as AccountEntityDomain,
       type: TransactionType.DEPOSIT,
       amount: 100,
-      status: 'status',
+      status: TransactionStatus.PROCESSING,
       createdAt: new Date(),
       updatedAt: new Date(),
     });

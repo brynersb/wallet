@@ -42,8 +42,18 @@ export class AccountEntityDomain extends Entity<AccountProps> {
     this._balance = value;
   }
 
-  public updateBalance(amount: number) {
+  public addAmount(amount: number) {
+    if (isNaN(amount) || !isFinite(amount)) {
+      throw new Error('Invalid amount');
+    }
     this._balance += amount;
+  }
+
+  public subtractAmount(amount: number) {
+    if (amount > this._balance) {
+      throw new Error('Insufficient balance');
+    }
+    this._balance -= amount;
   }
 
   get transactions(): TransactionEntityDomain[] {
