@@ -41,7 +41,7 @@ describe('TransactionsApiController', () => {
     it('should return a transaction and status CREATED if transaction is successful', async () => {
       const transactionRequestDto: TransactionRequestDto = {
         accountId: '16153f35-5b0a-4eb6-a4b4-c1ea55816bdc',
-        type: TransactionType.ADDITION,
+        type: TransactionType.DEPOSIT,
         customerId: '16153f35-5b0a-4eb6-a4b4-c1ea55816bdc',
         amount: 10.5,
       };
@@ -49,7 +49,7 @@ describe('TransactionsApiController', () => {
       const transactionResponseDto: TransactionsResponseDto = {
         id: 'transaction-id',
         accountId: '16153f35-5b0a-4eb6-a4b4-c1ea55816bdc',
-        type: TransactionType.ADDITION,
+        type: TransactionType.DEPOSIT,
         amount: 10.5,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -62,7 +62,7 @@ describe('TransactionsApiController', () => {
     it('should return a BusinessError with status NOT_FOUND if account is not found', async () => {
       const transactionRequestDto: TransactionRequestDto = {
         accountId: '16153f35-5b0a-4eb6-a4b4-c1ea55816bdc',
-        type: TransactionType.ADDITION,
+        type: TransactionType.DEPOSIT,
         customerId: '16153f35-5b0a-4eb6-a4b4-c1ea55816bdc',
         amount: 10.5,
       };
@@ -84,7 +84,7 @@ describe('TransactionsApiController', () => {
     it('should return a BusinessError with status INTERNAL_SERVER_ERROR for other errors', async () => {
       const transactionRequestDto: TransactionRequestDto = {
         accountId: '16153f35-5b0a-4eb6-a4b4-c1ea55816bdc',
-        type: TransactionType.ADDITION,
+        type: TransactionType.DEPOSIT,
         customerId: '16153f35-5b0a-4eb6-a4b4-c1ea55816bdc',
         amount: 10.5,
       };
@@ -111,7 +111,7 @@ describe('TransactionsApiController', () => {
       const transactionResponseDto: TransactionsResponseDto = {
         id: transactionId,
         accountId: '16153f35-5b0a-4eb6-a4b4-c1ea55816bdc',
-        type: TransactionType.ADDITION,
+        type: TransactionType.DEPOSIT,
         amount: 10.5,
         createdAt: new Date(),
         updatedAt: new Date(),

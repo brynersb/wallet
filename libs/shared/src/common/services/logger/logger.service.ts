@@ -6,28 +6,16 @@ import { LoggerServiceInterface } from '../../../../../domain/common/services/lo
 })
 export class LoggerService implements LoggerServiceInterface {
   private readonly logger: Logger = new Logger(LoggerService.name);
-  private _logPrefix: string;
-
-  setLogPrefix(logPrefix: string): void {
-    this._logPrefix = logPrefix;
-  }
 
   log(message: string): void {
-    this.logger.log(this.createFormattedMessage(message));
+    this.logger.log(message);
   }
 
   warn(message: string): void {
-    this.logger.warn(this.createFormattedMessage(message));
+    this.logger.warn(message);
   }
 
   error(message: string): void {
-    this.logger.error(this.createFormattedMessage(message));
-  }
-
-  private createFormattedMessage(message: string): string {
-    if (this._logPrefix) {
-      return `[${this._logPrefix}] ${message}`;
-    }
-    return message;
+    this.logger.error(message);
   }
 }

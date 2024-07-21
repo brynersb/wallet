@@ -31,7 +31,7 @@ describe('GetTransactionStatusUseCase', () => {
     const transactionId = '1';
     const transactionEntity = new TransactionEntityDomain({
       account: {} as AccountEntityDomain,
-      type: TransactionType.ADDITION,
+      type: TransactionType.DEPOSIT,
       amount: 100,
       status: 'status',
       createdAt: new Date(),

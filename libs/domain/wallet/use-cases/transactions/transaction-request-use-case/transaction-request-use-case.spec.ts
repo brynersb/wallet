@@ -7,7 +7,7 @@ import { TransactionEntityDomain } from '../../../entities/transaction-entity-do
 import { BusinessError } from '../../../../common/types/business-error';
 import { TransactionType } from '../../../enums/transaction-type.enum';
 import { AccountEntityDomain } from '../../../entities/account-entity-domain';
-import { TransactionOperationRequest } from '../../types/transaction-operation-type';
+import { TransactionOperationRequest } from '../../../types/transaction-operation-type';
 import TransactionErrorKey from '../../../utils/transaction-error-key';
 
 describe('TransactionRequestUseCase', () => {
@@ -53,7 +53,7 @@ describe('TransactionRequestUseCase', () => {
   it('should create a transaction and send a message if account is found', async () => {
     const request: TransactionOperationRequest = {
       accountId: '1',
-      type: TransactionType.ADDITION,
+      type: TransactionType.DEPOSIT,
       amount: 100,
       customerId: '1',
     };
@@ -81,7 +81,7 @@ describe('TransactionRequestUseCase', () => {
   it('should return a BusinessError if account is not found', async () => {
     const request: TransactionOperationRequest = {
       accountId: '1',
-      type: TransactionType.ADDITION,
+      type: TransactionType.DEPOSIT,
       amount: 100,
       customerId: '1',
     };
@@ -101,7 +101,7 @@ describe('TransactionRequestUseCase', () => {
   it('should return a BusinessError if an exception is thrown', async () => {
     const request: TransactionOperationRequest = {
       accountId: '1',
-      type: TransactionType.ADDITION,
+      type: TransactionType.DEPOSIT,
       amount: 100,
       customerId: '1',
     };

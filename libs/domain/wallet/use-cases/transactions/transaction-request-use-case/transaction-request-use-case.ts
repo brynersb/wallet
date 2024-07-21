@@ -6,7 +6,7 @@ import { TransactionEntityDomain } from '../../../entities/transaction-entity-do
 import { AccountRepositoryInterface } from '../../../repositories/account.repository.interface';
 import { TransactionRepositoryInterface } from '../../../repositories/transaction.repository.interface';
 import TransactionErrorKey from '../../../utils/transaction-error-key';
-import { TransactionOperationRequest } from '../../types/transaction-operation-type';
+import { TransactionOperationRequest } from '../../../types/transaction-operation-type';
 import { TransactionRequestUseCaseInterface } from './transaction-request-use-case.interface';
 
 export class TransactionRequestUseCase implements TransactionRequestUseCaseInterface {

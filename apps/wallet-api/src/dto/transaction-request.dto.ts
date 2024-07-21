@@ -12,7 +12,7 @@ export class TransactionRequestDto {
 
   /**
    * Transacion Type
-   * @example ADDITION || WITHDRAWAL || PURCHASE || CANCELLATION || REFUND
+   * @example DEPOSIT || WITHDRAWAL || PURCHASE || CANCELLATION || REFUND
 
    */
   @IsNotEmpty()

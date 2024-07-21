@@ -1,13 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TransactionsApiService } from './transactions-api.service';
-import { TransactionRequestUseCaseInterface } from '../../../../libs/domain/wallet/transactions/use-cases/transaction-request-use-case/transaction-request-use-case.interface';
-import { GetTransactionStatusUseCaseInterface } from '../../../../libs/domain/wallet/transactions/use-cases/get-transaction-status-use-case/get-transaction-status-case.interface';
-import { TransactionOperationRequest } from '../../../../libs/domain/wallet/transactions/types/transaction-operation-type';
+
 import { TransactionEntityDomain } from '../../../../libs/domain/wallet/entities/transaction-entity-domain';
 import { BusinessError } from '../../../../libs/domain/common/types/business-error';
 import { TransactionType } from '../../../../libs/domain/wallet/enums/transaction-type.enum';
 import TransactionErrorKey from '../../../../libs/domain/wallet/utils/transaction-error-key';
 import { AccountEntityDomain } from '../../../../libs/domain/wallet/entities/account-entity-domain';
+import { TransactionRequestUseCaseInterface } from '../../../../libs/domain/wallet/use-cases/transactions/transaction-request-use-case/transaction-request-use-case.interface';
+import { GetTransactionStatusUseCaseInterface } from '../../../../libs/domain/wallet/use-cases/transactions/get-transaction-status-use-case/get-transaction-status-case.interface';
+import { TransactionOperationRequest } from '../../../../libs/domain/wallet/types/transaction-operation-type';
 
 describe('TransactionsApiService', () => {
   let service: TransactionsApiService;
@@ -44,14 +45,14 @@ describe('TransactionsApiService', () => {
     it('should return a TransactionEntityDomain when transaction request is successful', async () => {
       const transactionRequestDto: TransactionOperationRequest = {
         accountId: '16153f35-5b0a-4eb6-a4b4-c1ea55816bdc',
-        type: TransactionType.ADDITION,
+        type: TransactionType.DEPOSIT,
         customerId: '16153f35-5b0a-4eb6-a4b4-c1ea55816bdc',
         amount: 10.5,
       };
 
       const transactionResponseDto: TransactionEntityDomain = new TransactionEntityDomain({
         account: {} as AccountEntityDomain, //
-        type: TransactionType.ADDITION,
+        type: TransactionType.DEPOSIT,
         amount: 10.5,
         status: 'PROCESSING',
         createdAt: new Date(),
@@ -69,7 +70,7 @@ describe('TransactionsApiService', () => {
     it('should return a BusinessError when transaction request fails', async () => {
       const transactionRequestDto: TransactionOperationRequest = {
         accountId: '16153f35-5b0a-4eb6-a4b4-c1ea55816bdc',
-        type: TransactionType.ADDITION,
+        type: TransactionType.DEPOSIT,
         customerId: '16153f35-5b0a-4eb6-a4b4-c1ea55816bdc',
         amount: 10.5,
       };
@@ -94,7 +95,7 @@ describe('TransactionsApiService', () => {
 
       const transactionResponseDto: TransactionEntityDomain = new TransactionEntityDomain({
         account: {} as AccountEntityDomain,
-        type: TransactionType.ADDITION,
+        type: TransactionType.DEPOSIT,
         amount: 10.5,
         status: 'PROCESSING',
         createdAt: new Date(),
