@@ -13,8 +13,10 @@ import { BusinessErrorResponseDto } from '../../dto/business-error.dto';
 import { TransactionRequestDto } from '../../dto/transaction-request.dto';
 import { BusinessError } from '../../../../../libs/domain/common/types/business-error';
 import TransactionErrorKey from '../../../../../libs/domain/wallet/utils/transaction-error-key';
+import { TransactionMapper } from '../../../../../libs/shared/src/common/mappers/transaction.mapper';
+import { TransactionEntityDomain } from '../../../../../libs/domain/wallet/entities/transaction-entity-domain';
 
-@ApiTags('transactions')
+@ApiTags('transaction')
 @Controller('transactions')
 export class TransactionsApiController {
   constructor(private readonly transactionsApiService: TransactionsApiService) {}
@@ -27,7 +29,9 @@ export class TransactionsApiController {
     const result = await this.transactionsApiService.createTransaction(transactionRequest);
 
     if (result && !result.hasOwnProperty('errorKey')) {
-      res.status(HttpStatus.CREATED).send(result);
+      res
+        .status(HttpStatus.CREATED)
+        .send(TransactionMapper.toResponse(result as TransactionEntityDomain) as TransactionsResponseDto);
     } else if (this.containsError(TransactionErrorKey.accountNotFound, result as BusinessError)) {
       res.status(HttpStatus.NOT_FOUND).send(result);
     } else {
@@ -43,7 +47,9 @@ export class TransactionsApiController {
     const result = await this.transactionsApiService.getTransaction(id);
 
     if (result && !result.hasOwnProperty('errorKey')) {
-      res.status(HttpStatus.OK).send(result);
+      res
+        .status(HttpStatus.OK)
+        .send(TransactionMapper.toResponse(result as TransactionEntityDomain) as TransactionsResponseDto);
     } else if (this.containsError(TransactionErrorKey.trasactionNotFound, result as BusinessError)) {
       res.status(HttpStatus.NOT_FOUND).send(result);
     } else {

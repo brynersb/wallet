@@ -22,7 +22,7 @@ export class GetTransactionStatusUseCase implements GetTransactionStatusUseCaseI
         return new BusinessError(TransactionErrorKey.trasactionNotFound, this.errorMessage);
       }
 
-      this.loggerService.log(`Succesfully get transaction status:${transactionFinded}`);
+      this.loggerService.log(`Succesfully get transaction status:${JSON.stringify(transactionFinded)}`);
       return transactionFinded;
     } catch (error) {
       this.errorMessage = `An error has occurred while get transaction by id, error:${error.message}`;

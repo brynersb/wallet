@@ -4,6 +4,6 @@ import { DepositAmounttUseCaseInterface } from './deposit-amount-use-case.interf
 
 export class DepositAmountUseCase extends BaseTransactionUseCase implements DepositAmounttUseCaseInterface {
   protected async processTransaction(account: AccountEntityDomain, amount: number): Promise<void> {
-    account.addAmount(amount);
+    account.addAmount(amount.toString());
   }
 }

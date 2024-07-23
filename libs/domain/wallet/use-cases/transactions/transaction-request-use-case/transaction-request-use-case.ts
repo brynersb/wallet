@@ -12,6 +12,7 @@ import { TransactionStatus, TransactionType } from '../../../enums/transaction-t
 
 export class TransactionRequestUseCase implements TransactionRequestUseCaseInterface {
   private errorMessage: string;
+  private transactionAmount: number;
   constructor(
     private readonly loggerService: LoggerServiceInterface,
     private readonly transactionRepository: TransactionRepositoryInterface,
@@ -30,10 +31,13 @@ export class TransactionRequestUseCase implements TransactionRequestUseCaseInter
 
       if (request.type === TransactionType.CANCELLATION || request.type === TransactionType.REFUND) {
         const transactionFinded = await this.transactionRepository.findById(request.transactionId);
+
         if (!transactionFinded) {
           this.errorMessage = `trasaction not found, trasactionId:${request.transactionId}`;
           this.loggerService.error(this.errorMessage);
           return new BusinessError(TransactionErrorKey.trasactionNotFound, this.errorMessage);
+        } else {
+          this.transactionAmount = transactionFinded.amount;
         }
       }
       const findedAccount = await this.accountRepository.findById(request.accountId);
@@ -47,7 +51,7 @@ export class TransactionRequestUseCase implements TransactionRequestUseCaseInter
         account: findedAccount,
         status: TransactionStatus.PROCESSING,
         type: request.type,
-        amount: request.amount,
+        amount: this.transactionAmount ?? request.amount,
         createdAt: new Date(),
         updatedAt: new Date(),
       });

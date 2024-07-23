@@ -23,7 +23,7 @@ export class AccountEntityDomain extends Entity<AccountProps> {
     this.balance = this.props.balance;
     this.transactions = this.props.transactions;
     this.createdAt = this.props.createdAt;
-    this.createdAt = this.props.updatedAt;
+    this.updatedAt = this.props.updatedAt;
   }
 
   get customer(): CustomerEntityDomain {
@@ -42,11 +42,8 @@ export class AccountEntityDomain extends Entity<AccountProps> {
     this._balance = value;
   }
 
-  public addAmount(amount: number) {
-    if (isNaN(amount) || !isFinite(amount)) {
-      throw new Error('Invalid amount');
-    }
-    this._balance += amount;
+  public addAmount(amount: string) {
+    this._balance += parseFloat(amount);
   }
 
   public subtractAmount(amount: number) {

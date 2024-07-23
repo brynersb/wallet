@@ -12,7 +12,7 @@ export class AccountRepository implements AccountRepositoryInterface {
   ) {}
   async findById(accountId: string): Promise<AccountEntityDomain> {
     const account = await this.accountRepository.findOne({ where: { id: accountId } });
-    return AccountMapper.toDomain(account);
+    return account ? AccountMapper.toDomain(account) : null;
   }
   async create(account: AccountEntityDomain): Promise<void> {
     const mappedAccount = AccountMapper.toRepository(account);

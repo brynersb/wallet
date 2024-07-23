@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, Relation } from 'typeorm';
 import { AccountEntity } from './account.entity';
 
 @Entity('customer')
@@ -12,11 +12,8 @@ export class CustomerEntity {
   @Column({ unique: true })
   email: string;
 
-  @Column()
-  password: string;
-
   @OneToMany(() => AccountEntity, (account) => account.customer)
-  accounts: AccountEntity[];
+  accounts: Relation<AccountEntity>[];
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;

@@ -1,4 +1,6 @@
+import { TransactionsResponseDto } from '../../../../../apps/wallet-api/src/dto/transaction-response.dto';
 import { TransactionEntityDomain } from '../../../../domain/wallet/entities/transaction-entity-domain';
+import { TransactionResponse } from '../../../../domain/wallet/types/account.type';
 import { TransactionEntity } from '../../../db/entities/transaction.entity';
 import { AccountMapper } from './account.mapper';
 
@@ -29,5 +31,29 @@ export class TransactionMapper {
     transactionEntity.created_at = transactionDomain.createdAt;
     transactionEntity.updated_at = transactionDomain.updatedAt;
     return transactionEntity;
+  }
+
+  static toResponse(transactionDomain: TransactionEntityDomain): TransactionsResponseDto {
+    return {
+      id: transactionDomain.id,
+      accountId: transactionDomain.account?.id,
+      type: transactionDomain.type,
+      amount: transactionDomain.amount,
+      status: transactionDomain.status,
+      createdAt: transactionDomain.createdAt,
+      updatedAt: transactionDomain.updatedAt,
+    };
+  }
+
+  static toSummary(transactionDomain: TransactionEntity): TransactionResponse {
+    return {
+      id: transactionDomain.id,
+      accountId: transactionDomain.account?.id,
+      type: transactionDomain.type,
+      amount: transactionDomain.amount,
+      status: transactionDomain.status,
+      createdAt: transactionDomain.created_at,
+      updatedAt: transactionDomain.updated_at,
+    };
   }
 }

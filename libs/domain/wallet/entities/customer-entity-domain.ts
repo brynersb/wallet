@@ -4,8 +4,7 @@ import { AccountEntityDomain } from './account-entity-domain';
 export interface CustomerProps {
   name: string;
   email: string;
-  password: string;
-  accounts: AccountEntityDomain[];
+  accounts?: AccountEntityDomain[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -13,8 +12,7 @@ export interface CustomerProps {
 export class CustomerEntityDomain extends Entity<CustomerProps> {
   private _name: string;
   private _email: string;
-  private _password: string;
-  private _accounts: AccountEntityDomain[];
+  private _accounts?: AccountEntityDomain[];
   private _createdAt: Date;
   private _updatedAt: Date;
 
@@ -22,7 +20,6 @@ export class CustomerEntityDomain extends Entity<CustomerProps> {
     super(props, id);
     this.name = this.props.name;
     this.email = this.props.email;
-    this.password = this.props.password;
     this.accounts = this.props.accounts;
     this.createdAt = this.props.createdAt;
     this.updatedAt = this.props.updatedAt;
@@ -42,14 +39,6 @@ export class CustomerEntityDomain extends Entity<CustomerProps> {
 
   private set email(value: string) {
     this._email = value;
-  }
-
-  get password(): string {
-    return this._password;
-  }
-
-  private set password(value: string) {
-    this._password = value;
   }
 
   get accounts(): AccountEntityDomain[] {

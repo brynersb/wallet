@@ -6,6 +6,7 @@ import { ConsumerConfig } from '../../../libs/shared/src/common/services/sqs/con
 import { WalletProcessorService } from './services/wallet-processor.service';
 import { DepositAmountProvider } from './providers/deposit-amount.provider';
 import { WithdrawalAmountProvider } from './providers/withdrawal-amount.provider';
+import { CancallationOrRefundAmountProvider } from './providers/cancellaation-or-refund-amount.provider';
 
 const rootDir = 'apps/wallet-worker';
 const envProperties = `${rootDir}/.env`;
@@ -26,12 +27,15 @@ const envProperties = `${rootDir}/.env`;
         DEPOSIT: WalletProcessorService,
         WITHDRAWAL: WalletProcessorService,
         BUY: WalletProcessorService,
+        CANCELLATION: WalletProcessorService,
+        REFUND: WalletProcessorService,
       },
     },
     SqsConsumerService,
     WalletProcessorService,
     DepositAmountProvider,
     WithdrawalAmountProvider,
+    CancallationOrRefundAmountProvider,
   ],
 })
 export class WalletWorkerModule {}

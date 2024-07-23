@@ -6,6 +6,7 @@ import { SqsProducerService } from './common/services/sqs/sqs-producer/sqs-produ
 import { LoggerService } from './common/services/logger/logger.service';
 import { TransactionRepository } from './common/repositories/transaction.repository';
 import { AccountRepository } from './common/repositories/account.repository';
+import { CustomerRepository } from './common/repositories/customer.repository';
 
 const services: Provider[] = [
   ConfigService,
@@ -13,6 +14,7 @@ const services: Provider[] = [
   { provide: 'SQSProducerServiceInterface', useClass: SqsProducerService },
   { provide: 'TransactionRepositoryInterface', useClass: TransactionRepository },
   { provide: 'AccountRepositoryInterface', useClass: AccountRepository },
+  { provide: 'CustomerRepositoryInterface', useClass: CustomerRepository },
 ];
 @Module({
   imports: [

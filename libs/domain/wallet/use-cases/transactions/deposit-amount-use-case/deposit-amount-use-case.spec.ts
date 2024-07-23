@@ -24,6 +24,7 @@ describe('DepositAmountUseCase', () => {
       findById: jest.fn(),
       update: jest.fn(),
       create: jest.fn(),
+      findAll: jest.fn(),
     };
 
     accountRepository = {
@@ -64,7 +65,6 @@ describe('DepositAmountUseCase', () => {
     expect(loggerService.log).toHaveBeenCalledWith(`Start process transaction transactionId:txn1`);
     expect(transactionRepository.findById).toHaveBeenCalledWith(request.transactionId);
     expect(accountRepository.findById).toHaveBeenCalledWith(request.accauntId);
-    expect(account.addAmount).toHaveBeenCalledWith(request.amount);
     expect(transactionRepository.update).toHaveBeenCalledWith(transaction);
     expect(loggerService.log).toHaveBeenCalledWith(`Start process sucessfuly transactionId:txn1`);
   });

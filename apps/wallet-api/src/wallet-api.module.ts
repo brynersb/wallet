@@ -5,6 +5,11 @@ import { TransactionsApiController } from './controllers/transactions/transactio
 import { TransactionsApiService } from './services/transactions-api.service';
 import { TransactionRequestProvider } from './providers/transaction-request.provider';
 import { GetTransactionStatusProvider } from './providers/get-transaction-status.provider';
+import { GetAccountBalanceProvider } from './providers/get-account-balance.provider';
+import { AccountController } from './controllers/account/account.controller';
+import { AccountService } from './services/account-api.service';
+import { GetAccountSummaryProvider } from './providers/get-account-summary.provider';
+import { CreateAccountProvider } from './providers/create-account.provider';
 
 const rootDir = 'apps/wallet-api';
 const envProperties = `${rootDir}/.env`;
@@ -16,7 +21,15 @@ const envProperties = `${rootDir}/.env`;
     }),
     SharedModule,
   ],
-  controllers: [TransactionsApiController],
-  providers: [TransactionsApiService, TransactionRequestProvider, GetTransactionStatusProvider],
+  controllers: [TransactionsApiController, AccountController],
+  providers: [
+    TransactionsApiService,
+    AccountService,
+    TransactionRequestProvider,
+    GetTransactionStatusProvider,
+    GetAccountBalanceProvider,
+    GetAccountSummaryProvider,
+    CreateAccountProvider,
+  ],
 })
 export class WalletApiModule {}

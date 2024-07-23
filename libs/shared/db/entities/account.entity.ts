@@ -1,10 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, OneToMany, JoinColumn, PrimaryColumn, Relation } from 'typeorm';
 import { CustomerEntity } from './Customer.entity';
 import { TransactionEntity } from './transaction.entity';
 
 @Entity('account')
 export class AccountEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn('uuid')
   id: string;
 
   @ManyToOne(() => CustomerEntity, (customer) => customer.accounts)
@@ -15,7 +15,7 @@ export class AccountEntity {
   balance: number;
 
   @OneToMany(() => TransactionEntity, (transaction) => transaction.account)
-  transactions: TransactionEntity[];
+  transactions: Relation<TransactionEntity>[];
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;

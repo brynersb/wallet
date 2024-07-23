@@ -45,7 +45,9 @@ describe('GetTransactionStatusUseCase', () => {
 
     expect(loggerService.log).toHaveBeenCalledWith(`Start get transaction status:${transactionId}`);
     expect(transactionRepository.findById).toHaveBeenCalledWith(transactionId);
-    expect(loggerService.log).toHaveBeenCalledWith(`Succesfully get transaction status:${transactionEntity}`);
+    expect(loggerService.log).toHaveBeenCalledWith(
+      `Succesfully get transaction status:${JSON.stringify(transactionEntity)}`,
+    );
     expect(result).toBe(transactionEntity);
   });
 
