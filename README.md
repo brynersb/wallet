@@ -21,12 +21,12 @@ POS /account/create/
 
 ### Transactions
 POST /transactions/
-Descrição: Realizar uma transação. Tipos de transação suportados: 'DEPOSIT', 'WITHDRAWAL', 'BUY', 'CANCELLATION' e 'REFUND'.
-Exemplo: POST http://localhost:3100/transactions/
+- Descrição: Realizar uma transação. Tipos de transação suportados: 'DEPOSIT', 'WITHDRAWAL', 'BUY', 'CANCELLATION' e 'REFUND'.
+- Exemplo: POST http://localhost:3100/transactions/
 
 GET /transactions/:id
-Descrição: Obter o resultado de uma transação solicitada.
-Exemplo: GET http://localhost:3100/transactions/1
+- Descrição: Obter o resultado de uma transação solicitada.
+- Exemplo: GET http://localhost:3100/transactions/1
 
 ### swagger
 - http://localhost:3100/swagger
