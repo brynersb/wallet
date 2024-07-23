@@ -31,6 +31,26 @@ Exemplo: GET http://localhost:3100/transactions/1
 ### swagger
 - http://localhost:3100/swagger
 
+## Desenho de Arquitetura da Solução
+
+
+1. **Recebimento de Transação:**
+   - O `wallet-api` recebe a solicitação de transação.
+   - Envia uma mensagem para a fila SQS.
+
+2. **Processamento de Transação:**
+   - O `wallet-worker` escuta a fila SQS.
+   - Recebe a mensagem da fila.
+   - Processa a transação (adição, retirada, compra, cancelamento ou estorno).
+   - Atualiza a tabela `transaction` com o status "processado" ou "erro".
+
+3. **Outras Operações (saldo e extrato):**
+   - O `wallet-api` trata diretamente as solicitações de saldo e extrato, acessando o banco de dados.
+
+### Diagrama de Arquitetura
+
+![Diagrama de Arquitetura](./docs/wallet.png)
+
 ## Instalação
 ```bash
 # Clone o repositório
