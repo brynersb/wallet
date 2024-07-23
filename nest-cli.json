@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/wallet-api/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/wallet-api/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/wallet-api",
+  "projects": {
+    "wallet-api": {
+      "type": "application",
+      "root": "apps/wallet-api",
+      "entryFile": "main",
+      "sourceRoot": "apps/wallet-api/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/wallet-api/tsconfig.app.json"
+      }
+    },
+    "wallet-worker": {
+      "type": "application",
+      "root": "apps/wallet-worker",
+      "entryFile": "main",
+      "sourceRoot": "apps/wallet-worker/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/wallet-worker/tsconfig.app.json"
+      }
+    },
+    "domain": {
+      "type": "library",
+      "root": "libs/domain",
+      "entryFile": "index",
+      "sourceRoot": "libs/domain/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/domain/tsconfig.lib.json"
+      }
+    },
+    "shared": {
+      "type": "library",
+      "root": "libs/shared",
+      "entryFile": "index",
+      "sourceRoot": "libs/shared/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/shared/tsconfig.lib.json"
+      }
+    }
+  }
+}
